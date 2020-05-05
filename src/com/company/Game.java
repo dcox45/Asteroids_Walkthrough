@@ -8,6 +8,8 @@ import java.awt.event.KeyListener;
 public class Game extends JFrame implements KeyListener {
 
     int x1, y1, x2, y2;     // these are the x and y coordinates of our line
+    int[] x;                // declaring an array of x coordinates for our Polygon
+    int[] y;                // and an array of y coordinates
 
     public void init(){                                                          // this method sets the initial conditions of the game
         this.setVisible(true);
@@ -16,16 +18,17 @@ public class Game extends JFrame implements KeyListener {
         this.setResizable(false);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);               // freezes the size of the window
         this.addKeyListener(this);
-        x1 = 20;
-        y1 = 30;
-        x2 = 200;
-        y2 = 300;
+        x = new int[3];
+        x[0] = 15;
+        x[1] = 0;
+        x[2] = 30;
+        y = new int[] {20, 50, 50};
     }
 
     public void paint(Graphics g){
         g.fillRect(0, 0, 900, 600);
         g.setColor(Color.GREEN);
-        g.drawLine(x1,y1, x2, y2);
+        g.drawPolygon(x, y, x.length);
     }
 
     public void update(Graphics g){

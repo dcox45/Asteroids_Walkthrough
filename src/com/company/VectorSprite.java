@@ -15,9 +15,9 @@ public class VectorSprite {
     public VectorSprite() {
         shape = new Polygon();
 
-        shape.addPoint(15, 20);
-        shape.addPoint(0, 50);
-        shape.addPoint(30, 50);
+        shape.addPoint(15, 0);
+        shape.addPoint(0, 30);
+        shape.addPoint(30, 30);
     }
 
     public void paint(Graphics g) {

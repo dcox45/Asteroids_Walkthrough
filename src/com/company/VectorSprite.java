@@ -24,4 +24,15 @@ public class VectorSprite {
         g.drawPolygon(shape);
     }
 
+    public void updatePosition() {
+        xposition += xspeed;
+        yposition += yspeed;
+
+        for(int i = 0; i < shape.npoints; i++) {
+            shape.xpoints[i] += xspeed;
+            shape.ypoints[i] += yspeed;
+        }
+
+    }
+
 }

@@ -22,8 +22,6 @@ public class Window extends JPanel {
         g.fillRect(0, 0, 900, 600);
         g.setColor(Color.GREEN);
         game.ship.paint(g);
-        repaint();
-
     }
 
 }

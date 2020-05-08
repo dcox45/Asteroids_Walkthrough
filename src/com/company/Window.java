@@ -1,5 +1,7 @@
 package com.company;
 
+import com.sun.media.sound.SoftFilter;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,9 +21,13 @@ public class Window extends JPanel {
     {
         super.paintComponent(g);
 
-        g.fillRect(0, 0, 900, 600);
-        g.setColor(Color.GREEN);
-        game.ship.paint(g);
+        game.offg.setColor(Color.BLACK);
+        game.offg.fillRect(0, 0, 900, 600);
+        game.offg.setColor(Color.GREEN);
+        game.ship.paint(game.offg);
+        g.drawImage(game.offscreen, 0, 0, this);
+        repaint();
+
     }
 
 }

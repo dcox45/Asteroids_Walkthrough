@@ -28,11 +28,33 @@ public class VectorSprite {
         xposition += xspeed;
         yposition += yspeed;
 
+        int x, y;
         for(int i = 0; i < shape.npoints; i++) {
-            shape.xpoints[i] += xspeed;
-            shape.ypoints[i] += yspeed;
+            //shape.xpoints[i] += xspeed;
+            //shape.ypoints[i] += yspeed;
+
+            x = (int)Math.round(shape.xpoints[i]*Math.cos(angle) - shape.ypoints[i] * Math.sin(angle));
+            y = (int)Math.round(shape.xpoints[i]*Math.sin(angle) + shape.ypoints[i] * Math.cos(angle));
+
+            shape.xpoints[i] = x;
+            shape.ypoints[i] = y;
         }
 
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

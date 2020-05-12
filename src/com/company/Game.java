@@ -39,14 +39,14 @@ public class Game extends JFrame implements KeyListener, ActionListener {
     @Override
     public void keyPressed(KeyEvent e) {
             if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                ship.angle += 1;
+                ship.angle +=  0.3;
             }
 
             if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-                ship.angle -= 1;
+                ship.angle -= 0.3;
             }
 
-        repaint();
+        //repaint();
     }
 
     @Override

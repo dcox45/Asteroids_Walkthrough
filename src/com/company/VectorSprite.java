@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class VectorSprite {
 
-    Polygon shape;          // each VectorSprite will have a Polygon
+    Polygon shape, drawShape;          // each VectorSprite will have 2 Polygons, for rotation and drawing
 
     double xposition;
     double yposition;
@@ -14,14 +14,23 @@ public class VectorSprite {
 
     public VectorSprite() {
         shape = new Polygon();
-
         shape.addPoint(15, 0);
-        shape.addPoint(0, 30);
-        shape.addPoint(30, 30);
+        shape.addPoint(-10, 10);
+        shape.addPoint(-10, -10);
+
+        drawShape = new Polygon();
+        drawShape.addPoint(15, 0);
+        drawShape.addPoint(-10, 10);
+        drawShape.addPoint(-10, -10);
+
+        xposition = 450;
+        yposition = 300;
     }
 
     public void paint(Graphics g) {
-        g.drawPolygon(shape);
+
+        g.drawPolygon(drawShape);
+
     }
 
     public void updatePosition() {
@@ -36,9 +45,10 @@ public class VectorSprite {
             x = (int)Math.round(shape.xpoints[i]*Math.cos(angle) - shape.ypoints[i] * Math.sin(angle));
             y = (int)Math.round(shape.xpoints[i]*Math.sin(angle) + shape.ypoints[i] * Math.cos(angle));
 
-            shape.xpoints[i] = x;
-            shape.ypoints[i] = y;
+            drawShape.xpoints[i] = x;
+            drawShape.ypoints[i] = y;
         }
+        drawShape.translate((int)Math.round(xposition), (int)Math.round(yposition));
 
     }
 

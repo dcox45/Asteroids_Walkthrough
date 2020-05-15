@@ -2,17 +2,22 @@ package com.company;
 
 public class Spacecraft extends VectorSprite {
 
+    public Spacecraft() {
+        ROTATION = 0.1;
+        THRUST = 5;
+    }
+
     public void accelerate() {
-        xspeed += Math.cos(angle) / 5;
-        yspeed += Math.sin(angle) / 5;
+        xspeed += Math.cos(angle) / THRUST;
+        yspeed += Math.sin(angle) / THRUST;
     }
 
     public void rotateLeft(){
-        angle -= 0.1;
+        angle -= ROTATION;
     }
 
     public void rotateRight(){
-        angle += 0.1;
+        angle += ROTATION;
     }
 
 }

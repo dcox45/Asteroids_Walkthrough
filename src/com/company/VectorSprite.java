@@ -11,6 +11,7 @@ public class VectorSprite {
     double xspeed;
     double yspeed;
     double angle;
+    double ROTATION;                // a constant that represents the amount of change in angle
 
     public VectorSprite() {
         shape = new Polygon();

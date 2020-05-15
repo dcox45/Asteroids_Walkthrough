@@ -15,6 +15,8 @@ public class Game extends JFrame implements KeyListener, ActionListener {
     Image offscreen;        // an image to be loaded offscreen
     Graphics offg;          // a graphics object to go along with the offscreen image
 
+    boolean upKey, leftKey, rightKey;           //fixes key locking
+
     public void init(){                                                          // this method sets the initial conditions of the game
         this.setVisible(true);
         this.setSize(900, 600);                                     // gives the game window a title
@@ -40,27 +42,56 @@ public class Game extends JFrame implements KeyListener, ActionListener {
     public void keyPressed(KeyEvent e) {
 
         if(e.getKeyCode() == KeyEvent.VK_UP) {
-            ship.accelerate();
-        }
-
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            ship.angle +=  0.3;
+            upKey = true;
         }
 
         if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-            ship.angle -= 0.3;
+            leftKey = true;
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            rightKey = true;
         }
 
         repaint();
     }
 
+    private void keyCheck() {
+
+        if(upKey) {
+            ship.accelerate();
+        }
+
+        if(leftKey) {
+            ship.rotateLeft();
+        }
+
+        if(rightKey) {
+            ship.rotateRight();
+        }
+
+    }
+
     @Override
     public void keyReleased(KeyEvent e) {
+
+        if(e.getKeyCode() == KeyEvent.VK_UP) {
+            upKey = false;
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+            leftKey = false;
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            rightKey = false;
+        }
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        keyCheck();
         ship.updatePosition();
     }
 

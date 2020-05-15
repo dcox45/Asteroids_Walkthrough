@@ -33,6 +33,7 @@ public class VectorSprite {
 
     }
 
+
     public void updatePosition() {
         xposition += xspeed;
         yposition += yspeed;

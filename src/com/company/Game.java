@@ -10,7 +10,7 @@ import java.awt.event.KeyListener;
 public class Game extends JFrame implements KeyListener, ActionListener {
 
     public Window panel;    // creates an instance of the Window class called "panel"
-    VectorSprite ship;      // creates an instance of VectorSprite called "ship"
+    Spacecraft ship;      // creates an instance of VectorSprite called "ship"
     Timer timer;
     Image offscreen;        // an image to be loaded offscreen
     Graphics offg;          // a graphics object to go along with the offscreen image
@@ -25,7 +25,7 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         add(this.panel = new Window(this), BorderLayout.CENTER);
         offscreen = createImage(this.getWidth(), this.getHeight());
         offg = offscreen.getGraphics();
-        ship = new VectorSprite();
+        ship = new Spacecraft();
         timer = new Timer(20, this);
         pack();
         timer.start();
@@ -38,15 +38,20 @@ public class Game extends JFrame implements KeyListener, ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                ship.angle +=  0.3;
-            }
 
-            if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-                ship.angle -= 0.3;
-            }
+        if(e.getKeyCode() == KeyEvent.VK_UP) {
+            ship.accelerate();
+        }
 
-        //repaint();
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            ship.angle +=  0.3;
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+            ship.angle -= 0.3;
+        }
+
+        repaint();
     }
 
     @Override

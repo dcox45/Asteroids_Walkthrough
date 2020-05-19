@@ -11,6 +11,7 @@ public class Game extends JFrame implements KeyListener, ActionListener {
 
     public Window panel;    // creates an instance of the Window class called "panel"
     Spacecraft ship;      // creates an instance of VectorSprite called "ship"
+    Asteroid rock;
     Timer timer;
     Image offscreen;        // an image to be loaded offscreen
     Graphics offg;          // a graphics object to go along with the offscreen image
@@ -28,6 +29,7 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         offscreen = createImage(this.getWidth(), this.getHeight());
         offg = offscreen.getGraphics();
         ship = new Spacecraft();
+        rock = new Asteroid();
         timer = new Timer(20, this);
         pack();
         timer.start();
@@ -93,6 +95,7 @@ public class Game extends JFrame implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         keyCheck();
         ship.updatePosition();
+        rock.updatePosition();
     }
 
 }

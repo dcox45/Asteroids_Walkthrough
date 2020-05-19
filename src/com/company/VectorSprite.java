@@ -15,18 +15,7 @@ public class VectorSprite {
     double THRUST;                  // represents the acceleration
 
     public VectorSprite() {
-        shape = new Polygon();
-        shape.addPoint(15, 0);
-        shape.addPoint(-10, 10);
-        shape.addPoint(-10, -10);
 
-        drawShape = new Polygon();
-        drawShape.addPoint(15, 0);
-        drawShape.addPoint(-10, 10);
-        drawShape.addPoint(-10, -10);
-
-        xposition = 450;
-        yposition = 300;
     }
 
     public void paint(Graphics g) {

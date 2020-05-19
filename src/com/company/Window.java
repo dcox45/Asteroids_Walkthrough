@@ -17,14 +17,14 @@ public class Window extends JPanel {
     }
 
     @Override
-    public void paintComponent(Graphics g)
-    {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         game.offg.setColor(Color.BLACK);
         game.offg.fillRect(0, 0, 900, 600);
         game.offg.setColor(Color.GREEN);
         game.ship.paint(game.offg);
+        game.rock.paint(game.offg);
         g.drawImage(game.offscreen, 0, 0, this);
         repaint();
 

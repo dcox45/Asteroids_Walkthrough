@@ -5,6 +5,7 @@ import com.sun.media.sound.SoftFilter;
 import javax.swing.*;
 import java.awt.*;
 
+
 public class Window extends JPanel {
 
     private Game game;
@@ -23,7 +24,9 @@ public class Window extends JPanel {
         game.offg.setColor(Color.BLACK);
         game.offg.fillRect(0, 0, 900, 600);
         game.offg.setColor(Color.GREEN);
-        game.ship.paint(game.offg);
+        if(game.collision() == false) {
+            game.ship.paint(game.offg);
+        }
         game.rock.paint(game.offg);
         g.drawImage(game.offscreen, 0, 0, this);
         repaint();

@@ -42,6 +42,7 @@ public class VectorSprite {
             drawShape.xpoints[i] = x;
             drawShape.ypoints[i] = y;
         }
+        drawShape.invalidate();
         drawShape.translate((int)Math.round(xposition), (int)Math.round(yposition));
 
     }

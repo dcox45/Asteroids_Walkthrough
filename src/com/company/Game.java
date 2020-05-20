@@ -36,6 +36,44 @@ public class Game extends JFrame implements KeyListener, ActionListener {
     }
 
     @Override
+    public void actionPerformed(ActionEvent e) {
+        keyCheck();
+        ship.updatePosition();
+        rock.updatePosition();
+    }
+
+    public boolean collision(){
+
+        int x, y;
+
+        for(int i = 0; i < ship.drawShape.npoints; i++) {
+
+            x = ship.drawShape.xpoints[i];
+            y = ship.drawShape.ypoints[i];
+
+            if(rock.drawShape.contains(x, y)) {
+                return true;
+            }
+        }
+
+        for(int i = 0; i < rock.drawShape.npoints; i++) {
+
+            x = rock.drawShape.xpoints[i];
+            y = rock.drawShape.ypoints[i];
+
+            if(ship.drawShape.contains(x, y)) {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
+
+    /////KEY EVENTS
+
+    @Override
     public void keyTyped(KeyEvent e) {
 
     }
@@ -89,13 +127,6 @@ public class Game extends JFrame implements KeyListener, ActionListener {
             rightKey = false;
         }
 
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        keyCheck();
-        ship.updatePosition();
-        rock.updatePosition();
     }
 
 }

@@ -14,6 +14,10 @@ public class VectorSprite {
     double ROTATION;                // a constant that represents the amount of change in angle
     double THRUST;                  // represents the acceleration
 
+    boolean active;                 // tracks dead / alive status of sprites
+
+    int counter;                    // increases by 1 with each timer tick
+
     public VectorSprite() {
 
     }
@@ -26,6 +30,8 @@ public class VectorSprite {
 
 
     public void updatePosition() {
+        counter++;
+
         xposition += xspeed;
         yposition += yspeed;
 

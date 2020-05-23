@@ -20,6 +20,8 @@ public class Spacecraft extends VectorSprite {
 
         ROTATION = 0.1;
         THRUST = 0.25;
+
+        active = true;
     }
 
     public void accelerate() {
@@ -33,6 +35,20 @@ public class Spacecraft extends VectorSprite {
 
     public void rotateRight(){
         angle += ROTATION;
+    }
+
+    public void hit() {
+        active = false;
+        counter = 0;
+    }
+
+    public void reset() {
+        xposition = 450;
+        yposition = 300;
+        xspeed = 0;
+        yspeed = 0;
+        angle = 0;
+        active = true;
     }
 
 }

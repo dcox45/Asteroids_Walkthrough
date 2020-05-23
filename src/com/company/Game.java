@@ -38,35 +38,51 @@ public class Game extends JFrame implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         keyCheck();
+        respawnShip();
         ship.updatePosition();
         rock.updatePosition();
+        checkCollisions();
     }
 
-    public boolean collision(){
+    public boolean collision(VectorSprite thing1, VectorSprite thing2) {
 
         int x, y;
 
-        for(int i = 0; i < ship.drawShape.npoints; i++) {
+        for(int i = 0; i < thing1.drawShape.npoints; i++) {
 
-            x = ship.drawShape.xpoints[i];
-            y = ship.drawShape.ypoints[i];
+            x = thing1.drawShape.xpoints[i];
+            y = thing1.drawShape.ypoints[i];
 
-            if(rock.drawShape.contains(x, y)) {
+            if(thing2.drawShape.contains(x, y)) {
                 return true;
             }
         }
 
-        for(int i = 0; i < rock.drawShape.npoints; i++) {
+        for(int i = 0; i < thing2.drawShape.npoints; i++) {
 
-            x = rock.drawShape.xpoints[i];
-            y = rock.drawShape.ypoints[i];
+            x = thing2.drawShape.xpoints[i];
+            y = thing2.drawShape.ypoints[i];
 
-            if(ship.drawShape.contains(x, y)) {
+            if(thing1.drawShape.contains(x, y)) {
                 return true;
             }
         }
-
         return false;
+    }
+
+    public void checkCollisions() {
+
+        if(collision(ship, rock)) {
+            ship.hit();
+        }
+
+    }
+
+    public void respawnShip() {
+
+        if(ship.active == false && ship.counter > 50) {
+            ship.reset();
+        }
 
     }
 

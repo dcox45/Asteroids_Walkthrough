@@ -35,6 +35,8 @@ public class Asteroid extends VectorSprite{
         a = Math.random() * (2 * Math.PI);
         xposition = Math.cos(a) * h + 450;
         yposition = Math.sin(a) * h + 300;
+
+        active = true;
     }
 
     public void updatePosition() {

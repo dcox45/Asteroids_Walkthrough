@@ -24,7 +24,7 @@ public class Window extends JPanel {
         game.offg.setColor(Color.BLACK);
         game.offg.fillRect(0, 0, 900, 600);
         game.offg.setColor(Color.GREEN);
-        if(game.collision() == false) {
+        if(game.ship.active) {
             game.ship.paint(game.offg);
         }
         game.rock.paint(game.offg);

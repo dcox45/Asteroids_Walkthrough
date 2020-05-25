@@ -12,7 +12,6 @@ public class Game extends JFrame implements KeyListener, ActionListener {
 
     public Window panel;                        // creates an instance of the Window class called "panel"
     Spacecraft ship;                            // creates an instance of VectorSprite called "ship"
-    Asteroid rock;
     ArrayList<Asteroid> asteroidList;           // A list of asteroid objects
     Timer timer;
     Image offscreen;                            // an image to be loaded offscreen
@@ -31,7 +30,6 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         offscreen = createImage(this.getWidth(), this.getHeight());
         offg = offscreen.getGraphics();
         ship = new Spacecraft();
-        rock = new Asteroid();
         timer = new Timer(20, this);
         asteroidList = new ArrayList();
         for (int i = 0; i < 6; i++) {
@@ -46,7 +44,6 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         keyCheck();
         respawnShip();
         ship.updatePosition();
-        rock.updatePosition();
         for(int i = 0; i < asteroidList.size(); i++) {
             asteroidList.get(i).updatePosition();
         }
@@ -81,17 +78,39 @@ public class Game extends JFrame implements KeyListener, ActionListener {
 
     public void checkCollisions() {
 
-        if(collision(ship, rock)) {
-            ship.hit();
+        for(int i = 0; i < asteroidList.size(); i++){
+            if(collision(ship, asteroidList.get(i))) {
+                ship.hit();
+            }
         }
 
     }
 
-    public void respawnShip() {
+        public void respawnShip() {
 
-        if(ship.active == false && ship.counter > 50) {
-            ship.reset();
+            if(ship.active == false && ship.counter > 50 && isRespawnSafe()) {
+                ship.reset();
+            }
+
         }
+
+    public boolean isRespawnSafe() {
+
+        int x, y, h;
+
+        for(int i = 0; i < asteroidList.size(); i++){
+
+            x = (int) (asteroidList.get(i).xposition - 450);
+            y = (int) (asteroidList.get(i).yposition - 300);
+            h = (int) Math.sqrt( (x * x) + (y * y) );
+
+            if(h < 100) {
+                return false;
+            }
+
+        }
+
+        return true;
 
     }
 

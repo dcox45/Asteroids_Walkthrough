@@ -22,7 +22,7 @@ public class Asteroid extends VectorSprite{
         xposition = 450;
         yposition = 300;
 
-        ROTATION = Math.random() / 2;
+        ROTATION = Math.random() / 4;
         THRUST = 0.25;
 
         double h, a;
@@ -32,7 +32,7 @@ public class Asteroid extends VectorSprite{
         yspeed = Math.sin(a) * h;
 
         h = Math.random() * 400 + 100;
-        a = Math.random() * (2 * Math.PI);
+        a = Math.random() * (2   * Math.PI);
         xposition = Math.cos(a) * h + 450;
         yposition = Math.sin(a) * h + 300;
 

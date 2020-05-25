@@ -6,19 +6,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class Game extends JFrame implements KeyListener, ActionListener {
 
-    public Window panel;    // creates an instance of the Window class called "panel"
-    Spacecraft ship;      // creates an instance of VectorSprite called "ship"
+    public Window panel;                        // creates an instance of the Window class called "panel"
+    Spacecraft ship;                            // creates an instance of VectorSprite called "ship"
     Asteroid rock;
+    ArrayList<Asteroid> asteroidList;           // A list of asteroid objects
     Timer timer;
-    Image offscreen;        // an image to be loaded offscreen
-    Graphics offg;          // a graphics object to go along with the offscreen image
+    Image offscreen;                            // an image to be loaded offscreen
+    Graphics offg;                              // a graphics object to go along with the offscreen image
 
     boolean upKey, leftKey, rightKey;           //fixes key locking
 
-    public void init(){                                                          // this method sets the initial conditions of the game
+    public void init() {                                                          // this method sets the initial conditions of the game
         this.setVisible(true);
         this.setSize(900, 600);                                     // gives the game window a title
         this.setTitle("Asteroids - by John Doe");                               // gives the game window a title
@@ -31,6 +33,10 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         ship = new Spacecraft();
         rock = new Asteroid();
         timer = new Timer(20, this);
+        asteroidList = new ArrayList();
+        for (int i = 0; i < 6; i++) {
+            asteroidList.add(new Asteroid());
+        }
         pack();
         timer.start();
     }
@@ -41,6 +47,9 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         respawnShip();
         ship.updatePosition();
         rock.updatePosition();
+        for(int i = 0; i < asteroidList.size(); i++) {
+            asteroidList.get(i).updatePosition();
+        }
         checkCollisions();
     }
 

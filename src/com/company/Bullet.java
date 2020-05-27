@@ -26,6 +26,8 @@ public class Bullet extends VectorSprite{
         THRUST = 10;
         xspeed = Math.cos(angle) * THRUST;
         yspeed = Math.sin(angle) * THRUST;
+
+        active = true;
     }
 
 }

@@ -12,12 +12,13 @@ public class Game extends JFrame implements KeyListener, ActionListener {
 
     public Window panel;                        // creates an instance of the Window class called "panel"
     Spacecraft ship;                            // creates an instance of VectorSprite called "ship"
-    ArrayList<Asteroid> asteroidList;           // A list of asteroid objects
+    ArrayList<Asteroid> asteroidList;           // a list of asteroid objects
+    ArrayList<Bullet> bulletList;               // a list of bullet objects
     Timer timer;
     Image offscreen;                            // an image to be loaded offscreen
     Graphics offg;                              // a graphics object to go along with the offscreen image
 
-    boolean upKey, leftKey, rightKey;           //fixes key locking
+    boolean upKey, leftKey, rightKey, spaceKey;           //fixes key locking
 
     public void init() {                                                          // this method sets the initial conditions of the game
         this.setVisible(true);
@@ -32,6 +33,7 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         ship = new Spacecraft();
         timer = new Timer(20, this);
         asteroidList = new ArrayList();
+        bulletList = new ArrayList();
         for (int i = 0; i < 6; i++) {
             asteroidList.add(new Asteroid());
         }
@@ -46,6 +48,15 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         ship.updatePosition();
         for(int i = 0; i < asteroidList.size(); i++) {
             asteroidList.get(i).updatePosition();
+            if(asteroidList.get(i).active == false) {
+                asteroidList.remove(i);
+            }
+        }
+        for(int i = 0; i < bulletList.size(); i++) {
+            bulletList.get(i).updatePosition();
+            if(bulletList.get(i).counter == 90 || bulletList.get(i).active == false) {
+                bulletList.remove(i);
+            }
         }
         checkCollisions();
     }
@@ -76,15 +87,22 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         return false;
     }
 
-    public void checkCollisions() {
+        public void checkCollisions() {
 
-        for(int i = 0; i < asteroidList.size(); i++){
-            if(collision(ship, asteroidList.get(i))) {
-                ship.hit();
+            for(int i = 0; i < asteroidList.size(); i++){
+                if(collision(ship, asteroidList.get(i))) {
+                    ship.hit();
+                }
+
+                for(int j = 0; j < bulletList.size(); j++){
+
+                    if(collision(bulletList.get(j), asteroidList.get(i))){
+                        bulletList.get(j).active = false;
+                        asteroidList.get(i).active = false;
+                    }
+                }
             }
         }
-
-    }
 
         public void respawnShip() {
 
@@ -114,6 +132,12 @@ public class Game extends JFrame implements KeyListener, ActionListener {
 
     }
 
+    public void fireBullet() {
+        if(ship.counter > 5 && ship.active) {
+            bulletList.add(new Bullet(ship.drawShape.xpoints[0], ship.drawShape.ypoints[0], ship.angle));
+            ship.counter = 0;
+        }
+    }
 
     /////KEY EVENTS
 
@@ -137,6 +161,10 @@ public class Game extends JFrame implements KeyListener, ActionListener {
             rightKey = true;
         }
 
+        if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+            spaceKey = true;
+        }
+
         repaint();
     }
 
@@ -154,6 +182,14 @@ public class Game extends JFrame implements KeyListener, ActionListener {
             ship.rotateRight();
         }
 
+        if(spaceKey) {
+            fireBullet();
+            if(ship.counter > 5 && ship.active) {
+                bulletList.add(new Bullet(ship.drawShape.xpoints[0], ship.drawShape.ypoints[0], ship.angle));
+                ship.counter = 0;
+            }
+        }
+
     }
 
     @Override
@@ -169,6 +205,10 @@ public class Game extends JFrame implements KeyListener, ActionListener {
 
         if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
             rightKey = false;
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+            spaceKey = false;
         }
 
     }

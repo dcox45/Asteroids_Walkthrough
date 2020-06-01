@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class Spacecraft extends VectorSprite {
 
+    int lives;
+
     public Spacecraft() {
         shape = new Polygon();
         shape.addPoint(15, 0);
@@ -22,6 +24,7 @@ public class Spacecraft extends VectorSprite {
         THRUST = 0.25;
 
         active = true;
+        lives = 3;
     }
 
     public void accelerate() {
@@ -40,6 +43,7 @@ public class Spacecraft extends VectorSprite {
     public void hit() {
         active = false;
         counter = 0;
+        lives --;
     }
 
     public void reset() {

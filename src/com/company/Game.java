@@ -88,7 +88,7 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         public void checkCollisions() {
 
             for(int i = 0; i < asteroidList.size(); i++){
-                if(collision(ship, asteroidList.get(i))) {
+                if(collision(ship, asteroidList.get(i)) && ship.active) {
                     ship.hit();
                 }
 

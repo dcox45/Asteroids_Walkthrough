@@ -25,6 +25,8 @@ public class Window extends JPanel {
         game.offg.fillRect(0, 0, 900, 600);
         game.offg.setColor(Color.GREEN);
         game.offg.drawString("Lives: " + game.ship.lives, 20, 580);
+        game.offg.drawString("Score: " + game.score, 440, 580);
+
         if(game.ship.active) {
             game.ship.paint(game.offg);
         }
@@ -36,6 +38,9 @@ public class Window extends JPanel {
         }
         if(game.asteroidList.isEmpty()) {
             game.offg.drawString("Game Over - You Win!", 400, 300);
+        }
+        if(game.ship.lives == 0) {
+            game.offg.drawString("Game Over - You Lose!", 400, 300);
         }
         g.drawImage(game.offscreen, 0, 0, this);
         repaint();

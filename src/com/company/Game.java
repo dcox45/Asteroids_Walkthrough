@@ -18,6 +18,8 @@ public class Game extends JFrame implements KeyListener, ActionListener {
     Image offscreen;                            // an image to be loaded offscreen
     Graphics offg;                              // a graphics object to go along with the offscreen image
 
+    int score;
+
     boolean upKey, leftKey, rightKey, spaceKey;           //fixes key locking
 
     public void init() {                                                          // this method sets the initial conditions of the game
@@ -37,6 +39,7 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         for (int i = 0; i < 6; i++) {
             asteroidList.add(new Asteroid());
         }
+        score = 0;
         pack();
         timer.start();
     }
@@ -89,12 +92,14 @@ public class Game extends JFrame implements KeyListener, ActionListener {
 
             for(int i = 0; i < asteroidList.size(); i++){
                 if(collision(ship, asteroidList.get(i)) && ship.active) {
+                    score -= 20;
                     ship.hit();
                 }
 
                 for(int j = 0; j < bulletList.size(); j++){
 
                     if(collision(bulletList.get(j), asteroidList.get(i))){
+                        score += 20;
                         bulletList.get(j).active = false;
                         asteroidList.get(i).active = false;
                     }
@@ -104,7 +109,7 @@ public class Game extends JFrame implements KeyListener, ActionListener {
 
         public void respawnShip() {
 
-            if(ship.active == false && ship.counter > 50 && isRespawnSafe()) {
+            if(ship.active == false && ship.counter > 50 && isRespawnSafe() && ship.lives > 0) {
                 ship.reset();
             }
 

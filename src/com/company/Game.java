@@ -48,9 +48,6 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         ship.updatePosition();
         for(int i = 0; i < asteroidList.size(); i++) {
             asteroidList.get(i).updatePosition();
-            if(asteroidList.get(i).active == false) {
-                asteroidList.remove(i);
-            }
         }
         for(int i = 0; i < bulletList.size(); i++) {
             bulletList.get(i).updatePosition();
@@ -59,6 +56,7 @@ public class Game extends JFrame implements KeyListener, ActionListener {
             }
         }
         checkCollisions();
+        checkAsteroidDestruction();
     }
 
     public boolean collision(VectorSprite thing1, VectorSprite thing2) {
@@ -136,6 +134,20 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         if(ship.counter > 5 && ship.active) {
             bulletList.add(new Bullet(ship.drawShape.xpoints[0], ship.drawShape.ypoints[0], ship.angle));
             ship.counter = 0;
+        }
+    }
+
+    public void checkAsteroidDestruction() {
+
+        for(int i = 0; i < asteroidList.size(); i++){
+
+            if(asteroidList.get(i).active == false) {
+                if(asteroidList.get(i).size > 1){
+                    asteroidList.add(new Asteroid(asteroidList.get(i).xposition, asteroidList.get(i).yposition, asteroidList.get(i).size - 1));
+                    asteroidList.add(new Asteroid(asteroidList.get(i).xposition, asteroidList.get(i).yposition, asteroidList.get(i).size - 1));
+                }
+                asteroidList.remove(i);
+            }
         }
     }
 

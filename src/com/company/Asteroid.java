@@ -4,20 +4,34 @@ import java.awt.*;
 
 public class Asteroid extends VectorSprite{
 
+    int size;
+
     public Asteroid() {
+        size = 3;
+        initializeAsteroid();
+    }
+
+    public Asteroid(double x, double y, int s) {
+        size = s;
+        initializeAsteroid();
+        xposition = x;
+        yposition = y;
+    }
+
+    public void initializeAsteroid() {
         shape = new Polygon();
-        shape.addPoint(30, 3);
-        shape.addPoint(5, 35);
-        shape.addPoint(-25, 10);
-        shape.addPoint(-17, -15);
-        shape.addPoint(20, -35);
+        shape.addPoint(15 * size, 3 * size);
+        shape.addPoint(5 * size, 17 * size);
+        shape.addPoint(-12 * size, 5 * size);
+        shape.addPoint(-8 * size, -8 * size);
+        shape.addPoint(10 * size, -17 * size);
 
         drawShape = new Polygon();
-        drawShape.addPoint(30, 3);
-        drawShape.addPoint(5, 35);
-        drawShape.addPoint(-25, 10);
-        drawShape.addPoint(-17, -15);
-        drawShape.addPoint(20, -35);
+        drawShape.addPoint(15 * size, 3 * size);
+        drawShape.addPoint(5 * size, 17 * size);
+        drawShape.addPoint(-12 * size, 5 * size);
+        drawShape.addPoint(-8 * size, -8 * size);
+        drawShape.addPoint(10 * size, -17 * size);
 
         xposition = 450;
         yposition = 300;

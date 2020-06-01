@@ -33,6 +33,9 @@ public class Window extends JPanel {
         for(int i = 0; i < game.bulletList.size(); i++) {
             game.bulletList.get(i).paint(game.offg);
         }
+        if(game.asteroidList.isEmpty()) {
+            game.offg.drawString("Game Over - You Win!", 400, 300);
+        }
         g.drawImage(game.offscreen, 0, 0, this);
         repaint();
     }

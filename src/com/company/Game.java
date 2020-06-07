@@ -60,6 +60,12 @@ public class Game extends JFrame implements KeyListener, ActionListener {
                 bulletList.remove(i);
             }
         }
+        for(int i = 0; i < debrisList.size(); i++){
+            debrisList.get(i).updatePosition();
+            if(debrisList.get(i).counter == 25) {
+                debrisList.remove(i);
+            }
+        }
         checkCollisions();
         checkAsteroidDestruction();
     }
@@ -93,9 +99,14 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         public void checkCollisions() {
 
             for(int i = 0; i < asteroidList.size(); i++){
+                double randomNum;
                 if(collision(ship, asteroidList.get(i)) && ship.active) {
                     score -= 20;
                     ship.hit();
+                    randomNum = Math.random() * 5 + 5;
+                    for(int r = 0; r < randomNum; r++) {
+                        debrisList.add(new Debris(ship.xposition, ship.yposition));
+                    }
                 }
 
                 for(int j = 0; j < bulletList.size(); j++){
@@ -104,6 +115,10 @@ public class Game extends JFrame implements KeyListener, ActionListener {
                         score += 20;
                         bulletList.get(j).active = false;
                         asteroidList.get(i).active = false;
+                        randomNum = Math.random() * 5 + 5;
+                        for(int r = 0; r < randomNum; r++) {
+                            debrisList.add(new Debris(asteroidList.get(i).xposition, asteroidList.get(i).yposition));
+                        }
                     }
                 }
             }

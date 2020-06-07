@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class Debris extends VectorSprite{
 
-    public Debris(){
-        shape = new Polygon(double x, double y);
+    public Debris(double x, double y){
+        shape = new Polygon();
 
         shape.addPoint(1, 1);
         shape.addPoint(-1, 1);

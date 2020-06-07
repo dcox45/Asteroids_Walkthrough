@@ -14,6 +14,7 @@ public class Game extends JFrame implements KeyListener, ActionListener {
     Spacecraft ship;                            // creates an instance of VectorSprite called "ship"
     ArrayList<Asteroid> asteroidList;           // a list of asteroid objects
     ArrayList<Bullet> bulletList;               // a list of bullet objects
+    ArrayList<Debris> debrisList;               // a list of debris objects
     Timer timer;
     Image offscreen;                            // an image to be loaded offscreen
     Graphics offg;                              // a graphics object to go along with the offscreen image
@@ -36,6 +37,7 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         timer = new Timer(20, this);
         asteroidList = new ArrayList();
         bulletList = new ArrayList();
+        debrisList = new ArrayList();
         for (int i = 0; i < 6; i++) {
             asteroidList.add(new Asteroid());
         }

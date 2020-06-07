@@ -1,7 +1,5 @@
 package com.company;
 
-import com.sun.media.sound.SoftFilter;
-
 import javax.swing.*;
 import java.awt.*;
 

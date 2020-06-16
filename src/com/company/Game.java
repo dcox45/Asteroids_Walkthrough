@@ -96,41 +96,41 @@ public class Game extends JFrame implements KeyListener, ActionListener {
         return false;
     }
 
-        public void checkCollisions() {
+    public void checkCollisions() {
 
-            for(int i = 0; i < asteroidList.size(); i++){
-                double randomNum;
-                if(collision(ship, asteroidList.get(i)) && ship.active) {
-                    score -= 20;
-                    ship.hit();
+        for(int i = 0; i < asteroidList.size(); i++){
+            double randomNum;
+            if(collision(ship, asteroidList.get(i)) && ship.active) {
+                score -= 20;
+                ship.hit();
+                randomNum = Math.random() * 5 + 5;
+                for(int r = 0; r < randomNum; r++) {
+                    debrisList.add(new Debris(ship.xposition, ship.yposition));
+                }
+            }
+
+            for(int j = 0; j < bulletList.size(); j++){
+
+                if(collision(bulletList.get(j), asteroidList.get(i))){
+                    score += 20;
+                    bulletList.get(j).active = false;
+                    asteroidList.get(i).active = false;
                     randomNum = Math.random() * 5 + 5;
                     for(int r = 0; r < randomNum; r++) {
-                        debrisList.add(new Debris(ship.xposition, ship.yposition));
-                    }
-                }
-
-                for(int j = 0; j < bulletList.size(); j++){
-
-                    if(collision(bulletList.get(j), asteroidList.get(i))){
-                        score += 20;
-                        bulletList.get(j).active = false;
-                        asteroidList.get(i).active = false;
-                        randomNum = Math.random() * 5 + 5;
-                        for(int r = 0; r < randomNum; r++) {
-                            debrisList.add(new Debris(asteroidList.get(i).xposition, asteroidList.get(i).yposition));
-                        }
+                        debrisList.add(new Debris(asteroidList.get(i).xposition, asteroidList.get(i).yposition));
                     }
                 }
             }
         }
+    }
 
-        public void respawnShip() {
+    public void respawnShip() {
 
-            if(ship.active == false && ship.counter > 50 && isRespawnSafe() && ship.lives > 0) {
-                ship.reset();
-            }
-
+        if(ship.active == false && ship.counter > 50 && isRespawnSafe() && ship.lives > 0) {
+            ship.reset();
         }
+
+    }
 
     public boolean isRespawnSafe() {
 

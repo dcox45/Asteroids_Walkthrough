@@ -1,0 +1,143 @@
+
+
+
+
+function createCar(manufacturer, model, color, horsepower, topSpeed, allWheelDrive)
+
+
+
+myCar = createCar(Toyota, Corolla, Red, 500, 175, false)
+
+myCar2 = createCar(Ford, Focus, White, 600, 1000, true)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////
+
+function shootLaser(speed, color, costume)
+
+if mouse clicked:
+
+    if score > 20 then:
+
+        shootLaser(50, blue, costume3)
+
+    if score > 10 but < 20:
+
+        shootLaser(35, red, costume2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if points = 5 then
+
+    shootLaser(15, 2, costume2)
+
+
+
+if points = 10 then
+
+    shootLaser(50, 4, costume3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////
+
+
+
+class Explosion(blockX, blockY, blockZ, fuze, condition)
+
+if(tnt.fuze = 0) {
+    myExplosion = new Explosion(tnt.xposition,tnt.yposition, tnt.zposition, tnt)
+}
+
+
+////////
+
+class Firework(colour, pattern, size)
+
+myFirework = new Firework(blue, circle, 100)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
